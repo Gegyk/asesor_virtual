@@ -21,6 +21,7 @@ def escuchar():
         print("error general")
 
 operaciones = [
+    "cerrar asesor",
     "abre steam",
     "abre google",
     "abre ópera",
@@ -31,29 +32,34 @@ operaciones = [
     "abre soldiers"
 ]
 
-texto = escuchar()
-texto = texto.lower()
+funcionamiento = True
 
-if texto == "escucha ordenador":
+while funcionamiento:
     texto = escuchar()
     texto = texto.lower()
 
-    if texto == operaciones[0]:
-        subp.run("C:\Program Files (x86)\Steam\steam.exe")
-    if texto == operaciones[1]:
-        subp.run("C:\Program Files\Google\Chrome\Application\chrome.exe")
-    if texto == operaciones[2]:
-        subp.run("C:\\Users\\ruben\\AppData\\Local\\Programs\\Opera GX\\launcher.exe")
-    if texto == operaciones[3]:
-        subp.run("C:\\Users\\ruben\\Desktop\\Minecraft Launcher.lnk", shell=True)
-    if texto == operaciones[4]:
-        os.system("shutdown /s /t 0")
-    if texto == operaciones[5]:
-        subp.run("C:\\Users\\ruben\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe")
-    if texto == operaciones[6]:
-        subp.run("C:\\Users\\ruben\\AppData\\Local\\Discord\\Update.exe --processStart Discord.exe")
-    if texto == operaciones[7]:
-        subp.run("E:\\Steam\\steamapps\\common\\Souldiers")
+    if texto == "escucha ordenador":
+        texto = escuchar()
+        texto = texto.lower()
+
+        if texto == operaciones[0]:
+            funcionamiento = False
+        if texto == operaciones[1]:
+            subp.run("C:\Program Files (x86)\Steam\steam.exe")
+        if texto == operaciones[2]:
+            subp.run("C:\Program Files\Google\Chrome\Application\chrome.exe")
+        if texto == operaciones[3]:
+            subp.run("C:\\Users\\ruben\\AppData\\Local\\Programs\\Opera GX\\launcher.exe")
+        if texto == operaciones[4]:
+            subp.run("C:\\Users\\ruben\\Desktop\\Minecraft Launcher.lnk", shell=True)
+        if texto == operaciones[5]:
+            os.system("shutdown /s /t 0")
+        if texto == operaciones[6]:
+            subp.run("C:\\Users\\ruben\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe")
+        if texto == operaciones[7]:
+            subp.run("C:\\Users\\ruben\\AppData\\Local\\Discord\\Update.exe --processStart Discord.exe")
+        if texto == operaciones[8]:
+            subp.run("E:\\Steam\\steamapps\\common\\Souldiers")
 
         
 
