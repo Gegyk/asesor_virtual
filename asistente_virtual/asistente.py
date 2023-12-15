@@ -1,37 +1,28 @@
 import speech_recognition as sr
 import subprocess as subp
 import pyautogui
-import pyttsx3
 import os
 import time
+import random
+import pygame
 
-
-# Crear un objeto Pyttx3 (voz)
+# Crear un objeto recognize 
 recognizer = sr.Recognizer()
-engine = pyttsx3.init()
-engine.setProperty('rate', 180)
 
-operaciones = [
-    "abre steam",
-    "abre ópera",
-    "abre el minecraft",
-    "apaga el ordenador",
-    "abre visual studio",
-    "abre soldiers",
-]
-
-discord = [
-    "abre discord",
-    "abre discord y conectate a llamada",
-]
-
-google = [
-    "abre google",
-    "busca en google",
-    "busca en youtube"
-]
 
 funcionamiento = True
+
+atencion = [
+    "C:\\Users\\ruben\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\atencion1.wav",
+    "C:\\Users\\ruben\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\atencion2.wav",
+    "C:\\Users\\ruben\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\atencion3.wav",
+    "C:\\Users\\ruben\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\atencion4.wav"
+]
+
+def reproducir_audio(ruta):
+    pygame.mixer.init()
+    pygame.mixer.music.load(ruta)
+    pygame.mixer.music.play()
 
 def escuchar():
     try:
@@ -54,55 +45,60 @@ def escuchar():
 
 
 def operacionesAcciones(texto):
-    if texto == operaciones[0]:
+    if texto == "abre steam":
         #Abre steam
-        engine.say("Abriendo Steam")
-        engine.runAndWait()
+        reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\steam.wav")
+
         subp.run("C:\Program Files (x86)\Steam\steam.exe")
         return True
-    if texto == operaciones[1]:
+    if texto == "abre ópera":
         #Abre Opera GX
-        engine.say("Abriendo Opera GX")
-        engine.runAndWait()
+        reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\opera.wav")
+
         subp.run("C:\\Users\\ruben\\AppData\\Local\\Programs\\Opera GX\\launcher.exe")
         return True
-    if texto == operaciones[2]:
+    if texto == "abre el minecraft":
         #Abre el Minecraft
-        engine.say("Hora de viciar al Minecraft")
-        engine.runAndWait()
+        reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\minecraft.wav")
+        time.sleep(2)
         subp.run("C:\\Users\\ruben\\Desktop\\Minecraft Launcher.lnk", shell=True)
         return True
-    if texto == operaciones[3]:
+    if texto == "apaga el ordenador":
         #Apaga el ordeandor
-        engine.say("Apagando el ordenador")
-        engine.runAndWait()
+        reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\apagar_pc.wav")
+        time.sleep(2)
         os.system("shutdown /s /t 0")
         return True
-    if texto == operaciones[4]:
+    if texto == "abre visual studio":
         #Abre visual studio
-        engine.say("Hora de programar. Abriendo visual studio")
-        engine.runAndWait()
+        reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\visual_studio.wav")
+        time.sleep(2)
         subp.run("C:\\Users\\ruben\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe")
         return True
-    if texto == operaciones[5]:
-        #Abre el videjuego de steam Souldiers
-        engine.say("Abriendo el Souldiers")
-        engine.runAndWait()
-        subp.run("E:\\Steam\\steamapps\\common\\Souldiers")
+    if texto == "cerrar asesor":
+        #Apaga el asesor virtual
+        reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\cerrar_asesor.wav")
+        time.sleep(2)
+        funcionamiento = False
+        resultado = true
+    if texto == "hijo de puta":
+        #Responde al insulto
+        reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\insulto.wav")
+        time.sleep(3)
         return True
 
 def discordAcciones(texto):
     # Operaciones de discord
-    if texto == discord[0]:
+    if texto == "abre discord":
         #Abre discord
-        engine.say("Abriendo discord")
-        engine.runAndWait()
+        reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\abrir_discord.wav")
+        time.sleep(1)
         subp.run("C:\\Users\\ruben\\AppData\\Local\\Discord\\Update.exe --processStart Discord.exe")
         return True
-    if texto == discord[1]:
+    if texto == "abre discord y conéctate a llamada" or texto == "entra a llamada" or texto == "conéctate a llamada" or texto == "entra en llamada":
         #Abre discord y se conecta
-        engine.say("Abriendo discord")
-        engine.runAndWait()
+        reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\conectarse_llamada.wav")
+        time.sleep(1)
         subp.run("C:\\Users\\ruben\\AppData\\Local\\Discord\\Update.exe --processStart Discord.exe")
         time.sleep(5)
         pyautogui.click(40, 145)
@@ -110,21 +106,21 @@ def discordAcciones(texto):
         return True
 
 def googleAcciones(texto):
-    if texto == google[0]:
+    if texto == "abre google":
         #Abre Google
-        engine.say("Abriendo google")
-        engine.runAndWait()
+        reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\chrome.wav")
+        time.sleep(1)
         os.startfile("C:\Program Files\Google\Chrome\Application\chrome.exe")
         return True
-    if texto == google[1]:
+    if texto == "busca en google":
         #Hace una busqueda en internet
         os.startfile("C:\Program Files\Google\Chrome\Application\chrome.exe")
-        engine.say("Que es lo que quieres que busque")
-        engine.runAndWait()
+        reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\buscar_google.wav")
+        time.sleep(2)
         texto = escuchar()
         if not isinstance(texto, str):
-            engine.say("Lo siento, no entendi lo que me pediste")
-            engine.runAndWait()
+            reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\no_entendido.wav")
+            time.sleep(2)
         else:
             subp.run("C:\Program Files\Google\Chrome\Application\chrome.exe")
             time.sleep(5)
@@ -132,11 +128,11 @@ def googleAcciones(texto):
             pyautogui.typewrite(texto)
             pyautogui.hotkey('enter')
             return True
-    if texto == google[2]:
+    if texto == "busca en youtube":
         #Hace una busqueda en youtube
         os.startfile("C:\Program Files\Google\Chrome\Application\chrome.exe")
-        engine.say("Que es lo que quieres que busque en youtube")
-        engine.runAndWait()
+        reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\buscar_google.wav")
+        time.sleep(2)
         texto = escuchar()
         pyautogui.click(240, 80)
         pyautogui.sleep(1)
@@ -148,11 +144,10 @@ def googleAcciones(texto):
         pyautogui.typewrite(texto)
         pyautogui.hotkey('enter')
         pyautogui.sleep(2)
-        pyautogui.click(640, 660)
+        pyautogui.click(640, 430)
         return True
 
-engine.say("Buenos dias Rubén")
-engine.runAndWait()
+reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\buenos_dias.wav")
 
 while funcionamiento:
 
@@ -161,31 +156,26 @@ while funcionamiento:
         texto = texto.lower()
 
         if texto.find("atención ordenador") != -1:
-            engine.say("¿Que es lo que estas buscando?")
-            engine.runAndWait()
+            nRandom = random.randint(0, 3)
+            reproducir_audio(atencion[nRandom])
+            time.sleep(1)
             
             texto = escuchar()
             if not isinstance(texto, str):
-                engine.say("Lo siento, no entendi lo que me pediste")
-                engine.runAndWait()
+                reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\no_entendido.wav")
+                time.sleep(2)
 
             texto = texto.lower()
 
-            if texto == "cerrar asesor":
-                #Apaga el asesor virtual
-                engine.say("Cerrando tu asesor virtual")
-                engine.runAndWait()
-                funcionamiento = False
-
-            resultado = False
-
             resultado = operacionesAcciones(texto)
-            resultado = googleAcciones(texto)
-            resultado = discordAcciones(texto)
+            if resultado == None:
+                resultado = googleAcciones(texto)
+            if resultado == None:
+                resultado = discordAcciones(texto)
 
-            if resultado == False:
-                engine.say("Lo siento, no entendi lo que me pediste")
-                engine.runAndWait()
+            if resultado == None :
+                reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\no_entendido.wav")
+                time.sleep(1)
      
     except Exception:
         pass
