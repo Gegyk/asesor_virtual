@@ -96,11 +96,10 @@ def operacionesAcciones(texto):
         reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\cerrar_minecraft.wav")
         cerrar_ventana('minecraft')
         return True
-    
+        
     if texto == "abre el fortnite" or texto == "abre fortnite":
         #Abre steam
         reproducir_audio("C:\\Users\\ruben\\Documents\\Visual studio\\Python\\asistente_virtual\\voces\\abrir_fortnite.wav")
-
         webbrowser.open("com.epicgames.launcher://apps/fn%3A4fe75bbc5a674f4f9b356b5c90567da5%3AFortnite?action=launch&silent=true")
         return True
     elif texto == "cierra fortnite" or texto == "cierra el fortnite":
